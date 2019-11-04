@@ -80,8 +80,8 @@ const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
         background: ${colors.primaryBackground};
         color: ${colors.offWhite};
-        font-size: ${fontSizes.medium};
-        ${media.thone`font-size: ${fontSizes.small};`};
+        font-size: ${fontSizes.large};
+        ${media.thone`font-size: ${fontSizes.medium};`};
     }
 
     a {
@@ -92,8 +92,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     section {
-        padding-top: calc(${theme.navHeight} + 10px);
-        padding-bottom: 110px;
+        padding-top: 40px;
+        padding-bottom: 80px;
     }
 
     ul, ol {

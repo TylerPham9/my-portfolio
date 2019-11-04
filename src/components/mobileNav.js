@@ -51,13 +51,13 @@ const NavList = styled.ul`
 const NavListItem = styled.li`
   margin: 0 auto 20px;
   position: relative;
-  font-size: ${fontSizes.large};
+  font-size: ${fontSizes.xlarge};
   font-weight: 600;
   ${media.thone`
     margin: 0 auto 10px;
-    font-size: ${fontSizes.medium};
+    font-size: ${fontSizes.large};
   `};
-  ${media.tiny`font-size: ${fontSizes.smallish};`};
+  ${media.tiny`font-size: ${fontSizes.medium};`};
 `;
 
 const NavLink = styled(Link)`
@@ -71,9 +71,21 @@ const ResumeLink = styled(NavLink)`
 `;
 
 const MobileMenu = ({ menuOpen, toggleMenu }) => {
+
+    const HandleMenuClick = e => {
+        const target = e.target;
+        const isLink = target.hasAttribute('href');
+        const isNotMenu = target.classList && target.classList[0].includes('MobileMenuContainer');
+    
+        if (isLink || isNotMenu) {
+          toggleMenu();
+        }
+      };
+
     return (
         <MobileMenuContainer
             menuOpen={menuOpen}
+            onClick={HandleMenuClick}
             aria-hidden={!menuOpen}
             tabIndex={menuOpen ? 1 : -1}>
 

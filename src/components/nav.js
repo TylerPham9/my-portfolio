@@ -54,7 +54,7 @@ const NavList = styled.ul`
 `;
 
 const NavListItem = styled.li`
-    font-size: ${fontSizes.medium};
+    font-size: ${fontSizes.large};
     font-weight: 600;
     margin: 0 10px;
     transition: ${theme.transition};
@@ -66,7 +66,7 @@ const NavLink = styled(Link)`
     ${mixins.inlineLink}
 `;
 
-const ResumeLink = styled(Link)`
+const ResumeLink = styled(NavLink)`
 
 `;
 
@@ -102,16 +102,13 @@ class Nav extends Component {
         this.state = {
             isMounted: false,
             menuOpen: false,
-            navShadow: false,
         }
     }
     componentDidMount() {
         setTimeout(() => this.setState({ isMounted: true }), 100);
-        window.addEventListener('scroll', () => this.handleScroll());
     }
     componentWillUnmount() {
         this.setState({ isMounted: false });
-        window.removeEventListener('scroll', () => this.handleScroll());
     }
 
     toggleMenu = () => {
@@ -119,13 +116,6 @@ class Nav extends Component {
         console.log(this.state.menuOpen);
     }
 
-    handleScroll = () => {
-        if (window.scrollY > 70 ) {
-            if (!this.state.navShadow){
-                this.setState({navShadow: true});
-            }
-        } 
-    }
         
     render() {
         return (
@@ -170,7 +160,6 @@ class Nav extends Component {
                         menuOpen={this.state.menuOpen} 
                         toggleMenu={this.toggleMenu} />
                 </Navbar>
-
             </NavContainer>
 
         )

@@ -8,6 +8,7 @@ import { theme, mixins, media } from '@styles';
 const { colors, fontSizes } = theme;
 
 const AboutContainer = styled.section`
+	padding-top: calc(${theme.navHeight});
 	${mixins.flexCenter};
 	width: 100%;
 	a {
