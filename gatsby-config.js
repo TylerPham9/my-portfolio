@@ -2,11 +2,16 @@ const config = require('./src/config')
 module.exports = {
   siteMetadata: {
     title: "Tyler's Portfolio!",
+    description: `
+      This is Tyler Pham's portfolio page!
+    `,
     author: "Tyler Pham",
-    siteTitle: config.siteTitle
+    siteUrl: "https://tylerpham.me",
+
   },
   plugins: [
     'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-styled-components',
       options: {
@@ -37,8 +42,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: "gatsby-starter-default",
-        short_name: "starter",
+        name: "tyler-pham",
+        short_name: "tp",
         start_url: "/",
         background_color: "#FFFFFF",
         display: "minimal-ui",

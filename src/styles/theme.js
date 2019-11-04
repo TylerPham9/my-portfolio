@@ -35,9 +35,6 @@ const theme = {
 	navHeight: '75px',
 	navScrollHeight: '70px',
 	margin: '20px',
-  
-	iconSize: '30px',
-	// iconSize: `${fontSizes.small}`,
 
 	tabHeight: 42,
 	tabWidth: 120,

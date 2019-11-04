@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Nav from './nav'
+import Head from './head'
 
 import { GlobalStyle } from '@styles';
 
@@ -13,6 +14,7 @@ if (typeof window !== "undefined") {
 const Layout = (props) => {
     return (
         <div id="root">
+            <Head />
             <GlobalStyle />
             <div>
                 <Nav />
