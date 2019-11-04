@@ -1,5 +1,6 @@
 module.exports = {
     siteTitle: 'Tyler Pham',
+    email: 'tylerpham.9@gmail.com',
 
     navLinks: [
         {
@@ -12,7 +13,7 @@ module.exports = {
         },
         {
             name: 'Projects',
-            url: '/#about'
+            url: '/#projects'
         },
         {
             name: 'Contact',

@@ -2,7 +2,7 @@ import React from 'react'
 
 import Nav from './nav'
 
-import { GlobalStyle, theme } from '@styles';
+import { GlobalStyle } from '@styles';
 
 
 if (typeof window !== "undefined") {

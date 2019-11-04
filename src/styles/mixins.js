@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import theme from './theme';
-import media from './media';
-const { colors, fontSizes, fonts } = theme;
+
+const { colors } = theme;
 
 const mixins = {
 
@@ -17,25 +17,19 @@ const mixins = {
 		align-items: center;
 	`,
 
-//   outline: css`
-//     outline: 1px solid red;
-//   `,
+	fadeinEnter: css`
+        text-align: left;
+        opacity: 0;
+        transform: translateY(-60px);
+        transition-property: transform, opacity;
+        transition-duration: 400ms;
+	`,
 
-//   link: css`
-//     display: inline-block;
-//     text-decoration: none;
-//     text-decoration-skip-ink: auto;
-//     color: inherit;
-//     position: relative;
-//     transition: ${theme.transition};
-//     cursor: pointer;
-//     &:hover,
-//     &:active,
-//     &:focus {
-//       color: ${colors.green};
-//       outline: 0;
-//     }
-//   `,
+	fadeinActive: css`
+		transform: translateY(0);
+		opacity: 1;
+	`,
+
 
 	inlineLink: css`
 		display: inline-block;
@@ -44,7 +38,6 @@ const mixins = {
 		position: relative;
 		transition: ${theme.transition};
 		cursor: pointer;
-		color: ${colors.white};
 		
 		&:hover,
 		&:focus,
@@ -57,77 +50,26 @@ const mixins = {
 		}
 
 		&:after {
-		content: '';
-		display: block;
-		width: 0;
-		height: 3px;
-		position: relative;
-		bottom: 0;
-		background-color: ${colors.primary};
-		transition: ${theme.transition};
-		opacity: 1.0;
+			content: '';
+			display: block;
+			width: 0;
+			height: 3px;
+			position: relative;
+			bottom: 0;
+			background-color: ${colors.primary};
+			transition: ${theme.transition};
+			opacity: 1.0;
 		}
 	`,
 
-//   smallButton: css`
-//     color: ${colors.green};
-//     background-color: transparent;
-//     border: 1px solid ${colors.green};
-//     border-radius: ${theme.borderRadius};
-//     padding: 0.75rem 1rem;
-//     font-size: ${fontSizes.smallish};
-//     font-family: ${fonts.SFMono};
-//     line-height: 1;
-//     text-decoration: none;
-//     cursor: pointer;
-//     transition: ${theme.transition};
-//     &:hover,
-//     &:focus,
-//     &:active {
-//       background-color: ${colors.transGreen};
-//     }
-//     &:after {
-//       display: none !important;
-//     }
-//   `,
-
-//   bigButton: css`
-//     color: ${colors.green};
-//     background-color: transparent;
-//     border: 1px solid ${colors.green};
-//     border-radius: ${theme.borderRadius};
-//     padding: 1.25rem 1.75rem;
-//     font-size: ${fontSizes.small};
-//     font-family: ${fonts.SFMono};
-//     line-height: 1;
-//     text-decoration: none;
-//     cursor: pointer;
-//     transition: ${theme.transition};
-//     &:hover,
-//     &:focus,
-//     &:active {
-//       background-color: ${colors.transGreen};
-//     }
-//     &:after {
-//       display: none !important;
-//     }
-//   `,
-
-//   sidePadding: css`
-//     padding: 0 150px;
-//     ${media.desktop`padding: 0 100px;`};
-//     ${media.tablet`padding: 0 50px;`};
-//     ${media.phablet`padding: 0 25px;`};
-//   `,
-
-  boxShadow: css`
-    box-shadow: 0 10px 30px -15px ${colors.black};
-    transition: ${theme.transition};
-    &:hover,
-    &:focus {
-      box-shadow: 0 20px 30px -15px ${colors.black};
-    }
-  `,
+	boxShadow: css`
+    	box-shadow: 0 4px 15px 0px ${colors.black};
+    	transition: ${theme.transition};
+		&:hover,
+		&:focus {
+			box-shadow: 0 8px 15px 5px ${colors.black};
+		}
+	`,
 };
 
 export default mixins;

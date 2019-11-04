@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
+import Social from './social';
+import MobileMenu from './mobileNav';
 import { Link } from 'gatsby';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { navLinks, socialMedia } from '@config';
+import { navLinks } from '@config';
 import styled from 'styled-components';
 import { theme, mixins, media } from '@styles';
-const { colors, fontSizes, fonts } = theme;
+const { colors, fontSizes } = theme;
 
 const NavContainer = styled.header`
     ${mixins.flexBetween};
     position: fixed;
     top: 0;
     width: 100%;
+    overflow-x: hidden;
     padding: 0px 50px;
     background-color: ${colors.primaryBackground};
-    z-index: 1;
+    z-index: 11;
     height: ${theme.navHeight};
+    ${media.bigDesktop`padding: 0 40px;`};
+    ${media.desktop`padding: 0 25px;`};
+    box-sizing: border-box;
+    transition: ${theme.transition};
+    box-shadow: 0 10px 30px -15px ${colors.black};
+
+    .fadein {
+        ${mixins.fadeinEnter}
+    };
+
+    .fadeGroup {
+        .fadein {
+            ${mixins.fadeinActive}
+        }
+    }
 `;
 
 const Navbar = styled.nav`
     ${mixins.flexBetween};
     position: relative;
     width: 100%;
+    z-index: 12;
 `;
 
 const NavLinks = styled.div`
     display: flex;
     align-items: center;
-    ${media.tablet`display: none;`};
+    ${media.desktop`display: none;`};
 `;
 
 const NavList = styled.ul`
-    div {
-        ${mixins.flexBetween};
-    }
+    ${mixins.flexBetween};
     margin: 0;
     list-style-type: none;
 `;
@@ -41,33 +57,17 @@ const NavListItem = styled.li`
     font-size: ${fontSizes.medium};
     font-weight: 600;
     margin: 0 10px;
+    transition: ${theme.transition};
 `;
 
 const NavLink = styled(Link)`
     padding: 12px 8px;
-    color: ${colors.white};
     text-transform: uppercase;
     ${mixins.inlineLink}
 `;
 
-const SocialContainer = styled.div`
-    color: ${colors.white};
+const ResumeLink = styled(Link)`
 
-`;
-
-
-const SocialLink = styled.a`
-    padding: 5px;
-    color: ${colors.white};
-    display: inline-block;
-    transition: ${theme.transition};
-    font-size: ${theme.iconSize};
-    /* transition: all 1s ease-out; */
-    &:hover,
-    &:focus {
-        transform: translateY(-5px);
-        color: ${colors.primary};
-    }
 `;
 
 const Hamburger = styled.div`
@@ -76,95 +76,101 @@ const Hamburger = styled.div`
     padding: 5px;
     cursor: pointer;
     text-transform: none;
-    color: inherit;
     border: 0;
     background-color: transparent;
     display: none;
-    ${media.tablet`display: flex;`};
+    ${media.desktop`display: flex;`};
+
+    transition: ${theme.transition};
+    z-index: 11;
+    &:hover,
+    &:focus {
+        color: ${colors.primary};
+    }
+
 `;
 
 const HamburgerBox = styled.div`
     position: relative;
     display: inline-block;
-    font-size: ${theme.iconSize};
+    font-size: ${fontSizes.xxlarge};
 `;
-
 
 class Nav extends Component {
     constructor(props) {
         super(props)
         this.state = {
             isMounted: false,
-            menuOpen: false
+            menuOpen: false,
+            navShadow: false,
         }
     }
     componentDidMount() {
         setTimeout(() => this.setState({ isMounted: true }), 100);
+        window.addEventListener('scroll', () => this.handleScroll());
     }
     componentWillUnmount() {
         this.setState({ isMounted: false });
+        window.removeEventListener('scroll', () => this.handleScroll());
     }
 
     toggleMenu = () => {
         this.setState({ menuOpen: !this.state.menuOpen });
-        console.log(this.state.menuOpen)
+        console.log(this.state.menuOpen);
     }
 
+    handleScroll = () => {
+        if (window.scrollY > 70 ) {
+            if (!this.state.navShadow){
+                this.setState({navShadow: true});
+            }
+        } 
+    }
+        
     render() {
         return (
             <NavContainer>
-                <Navbar>
-                    <SocialContainer>
-                        <TransitionGroup>
-                            {this.state.isMounted &&
-                                socialMedia &&
-                                socialMedia.map(({ name, url, icon }, i) => (
-                                    <CSSTransition key={i} classNames="fadedown" timeout={3000}>
-                                        <SocialLink
-                                            style={{ transitionDelay: `${i * 100}ms` }}
-                                            key={i}
-                                            href={url}
-                                            target="_blank"
-                                            aria-label={name}
-                                            rel="nofollow noopener noreferrer">
-                                            <i className={icon} />
-                                        </SocialLink>
-                                    </CSSTransition>
-                                ))}
-
-                        </TransitionGroup>
-                    </SocialContainer>
-
-                    <TransitionGroup>
-                        {this.state.isMounted && (
-                            <CSSTransition classNames="fade" timeout={3000}>
-                                <Hamburger onClick={this.toggleMenu}>
-                                    <HamburgerBox>
-                                        <i className="fa fa-bars" />
-                                        {/* <HamburgerInner menuOpen={this.state.menuOpen} /> */}
-                                    </HamburgerBox>
-                                </Hamburger>
-                            </CSSTransition>
-                        )}
-                    </TransitionGroup>
-
+                <Navbar className={`${this.state.isMounted ? "fadeGroup" : ""}`}>
+                    <div>
+                        <Social />
+                    </div>
+                    <Hamburger onClick={this.toggleMenu}>
+                        <HamburgerBox
+                            style={{ transitionDelay: `${300 + theme.fadeinOffset}ms` }}
+                            className="fadein">
+                            <i className="fa fa-bars" />
+                        </HamburgerBox>
+                    </Hamburger>
 
                     <NavLinks>
                         <NavList>
-                            <TransitionGroup>
-                                {this.state.isMounted &&
-                                    navLinks &&
-                                    navLinks.map(({ url, name }, i) => (
-                                        <CSSTransition key={i} classNames="fadedown" timeout={3000}>
-                                            <NavListItem key={i} style={{ transitionDelay: `${i * 100}ms` }}>
-                                                <NavLink to={url}>{name}</NavLink>
-                                            </NavListItem>
-                                        </CSSTransition>
-                                    ))}
-                            </TransitionGroup>
+                            {navLinks &&
+                                navLinks.map(({ url, name }, i) => (
+                                    <NavListItem
+                                        key={i}
+                                        style={{ transitionDelay: `${i * 50 + 300 + theme.fadeinOffset}ms` }}
+                                        className="fadein">
+                                        <NavLink to={url}>{name}</NavLink>
+                                    </NavListItem>
+                                ))}
+                            <NavListItem
+                                style={{ transitionDelay: `${200 + 300 + theme.fadeinOffset}ms` }}
+                                className="fadein">
+                                <ResumeLink
+                                    as='a'
+                                    href="./Resume.pdf"
+                                    target="_blank"
+                                    rel="nofollow noopener noreferrer">
+                                    Resume
+                                </ResumeLink>
+                            </NavListItem>
                         </NavList>
                     </NavLinks>
+                    <MobileMenu 
+                        menuOpen={this.state.menuOpen} 
+                        toggleMenu={this.toggleMenu} />
                 </Navbar>
+
             </NavContainer>
 
         )

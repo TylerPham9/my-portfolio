@@ -1,14 +1,68 @@
 import { createGlobalStyle } from 'styled-components';
-import theme from './theme'
+
+import { theme, media } from '@styles';
 
 const { colors, fontSizes } = theme;
 
 const GlobalStyle = createGlobalStyle`
 
+    /* lato-300 - latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: url('fonts/lato/lato-v16-latin-300.eot'); /* IE9 Compat Modes */
+  src: local('Lato Light'), local('Lato-Light'),
+       url('fonts/lato/lato-v16-latin-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/lato/lato-v16-latin-300.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/lato/lato-v16-latin-300.woff') format('woff'), /* Modern Browsers */
+       url('fonts/lato/lato-v16-latin-300.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/lato/lato-v16-latin-300.svg#Lato') format('svg'); /* Legacy iOS */
+}
+/* lato-regular - latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/lato/lato-v16-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Lato Regular'), local('Lato-Regular'),
+       url('fonts/lato/lato-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/lato/lato-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/lato/lato-v16-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('fonts/lato/lato-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/lato/lato-v16-latin-regular.svg#Lato') format('svg'); /* Legacy iOS */
+}
+/* lato-700 - latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/lato/lato-v16-latin-700.eot'); /* IE9 Compat Modes */
+  src: local('Lato Bold'), local('Lato-Bold'),
+       url('fonts/lato/lato-v16-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/lato/lato-v16-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/lato/lato-v16-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('fonts/lato/lato-v16-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/lato/lato-v16-latin-700.svg#Lato') format('svg'); /* Legacy iOS */
+}
+/* lato-900 - latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  src: url('fonts/lato/lato-v16-latin-900.eot'); /* IE9 Compat Modes */
+  src: local('Lato Black'), local('Lato-Black'),
+       url('fonts/lato/lato-v16-latin-900.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/lato/lato-v16-latin-900.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/lato/lato-v16-latin-900.woff') format('woff'), /* Modern Browsers */
+       url('fonts/lato/lato-v16-latin-900.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('fonts/lato/lato-v16-latin-900.svg#Lato') format('svg'); /* Legacy iOS */
+}
+
     html {
         box-sizing: border-box;
-        width: 100%;
-        font-family: sans-serif;
+        /* width: 100%; */
+        font-family: "Lato", sans-serif;
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;
     }
@@ -25,14 +79,21 @@ const GlobalStyle = createGlobalStyle`
         min-height: 100%;
         overflow-x: hidden;
         background: ${colors.primaryBackground};
-        color: ${colors.white};
+        color: ${colors.offWhite};
+        font-size: ${fontSizes.medium};
+        ${media.thone`font-size: ${fontSizes.small};`};
     }
 
     a {
         display: inline-block;
+        color: ${colors.offWhite};
         text-decoration: none;
-        color: ${colors.primary};
-        transition: ${theme.transition};
+        text-decoration-skip-ink: none;
+    }
+
+    section {
+        padding-top: calc(${theme.navHeight} + 10px);
+        padding-bottom: 110px;
     }
 
     ul, ol {
@@ -41,11 +102,11 @@ const GlobalStyle = createGlobalStyle`
         list-style: none;
     }
 
-    h1, h2, h3 {
+    h1, h2, h3, h4, h5 {
         padding: 0;
         margin: 0;
-        color: ${colors.white};
-        font-weight: 100;
+        font-weight: 600;
+        font-family: "Lato", sans-serif;
     }
 
     .gatsby-image-outer-wrapper {
@@ -56,43 +117,11 @@ const GlobalStyle = createGlobalStyle`
         max-width: 100%;
         vertical-align: middle;
     }
-    p {
-        font-size: ${fontSizes.medium};
-    }
 
-    /* .fadeup-enter {
-        opacity: 0.01;
-        transform: translateY(20px);
-        transition: opacity 300ms ${theme.easing}, transform 300ms ${theme.easing};
+    hr {
+        width: 100%;
+        border: 1px solid red;
     }
-    .fadeup-enter-active {
-        opacity: 1;
-        transform: translateY(0px);
-        transition: opacity 300ms ${theme.easing}, transform 300ms ${theme.easing};
-    } */
-    .fadedown-enter {
-        opacity: 0.01;
-        transform: translateY(-20px);
-        transition: opacity 300ms ${theme.easing}, transform 300ms ${theme.easing};
-    }
-    .fadedown-enter-active {
-        opacity: 1;
-        transform: translateY(0px);
-        transition: opacity 300ms ${theme.easing}, transform 300ms ${theme.easing};
-    }
-    .fade-enter {
-        opacity: 0.01;
-        transition: opacity 1000ms ${theme.easing};
-    }
-    .fade-enter-active {
-        opacity: 1;
-        transition: opacity 1000ms ${theme.easing};
-    }
-
-
-
-
-
 `;
 
 export default GlobalStyle;

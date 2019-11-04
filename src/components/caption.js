@@ -1,16 +1,23 @@
 import React, { Component } from "react"
 import styled from 'styled-components';
-import { theme, mixins, media} from '@styles';
-const { colors, fontSizes, fonts } = theme;
-
+import { theme, mixins, media } from '@styles';
 
 const CaptionContainer = styled.div`
-    padding: 1em 2em;
+    padding: 2em 2em;
     opacity: 1;
     max-width: calc(${theme.captionWidth} - ${theme.captionItemMargin});
-    ${media.tablet`padding: 1em 3em;`};
+    ${media.tablet`padding: 1em 1em;`};
 
-`
+    .fadein {
+        ${mixins.fadeinEnter}
+    };
+    
+    .fadeGroup { 
+        .fadein {
+            ${mixins.fadeinActive}
+        }
+    }
+`;
 
 const CaptionItem = styled.div`   
     display: flex;
@@ -18,34 +25,9 @@ const CaptionItem = styled.div`
     justify-content: center;
     width: 100%;
     opacity: 0.9;
-    max-width: 500px;
-    h1,
-    h2,
-    h3,
-    h4,
-    p {
-        margin: 6px ${theme.captionItemMargin};
-        text-align: left;
-        opacity: 0;
-        transform: translateY(-60px);
-        transition-property: transform, opacity;
-        transition-duration: 400ms;
-    };
-    
-    .fadein & { 
-        h1,
-        h2,
-        h3,
-        h4,
-        div p {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
+    max-width: 700px;
 
     ${media.tablet`max-width: 500px;`};
-
-
 `;
 
 class Caption extends Component {
@@ -69,7 +51,7 @@ class Caption extends Component {
             const options = {
                 root: null, // relative to document viewport
                 rootMargin: "0px", // margin around root. Values are similar to css property. Unitless values not allowed
-                threshold: 0.2, // visible amount of item shown in relation to root
+                threshold: 0.3, // visible amount of item shown in relation to root
             }
 
             const onChange = (changes, observer) => {
@@ -102,9 +84,10 @@ class Caption extends Component {
         return (
             <CaptionContainer
                 ref={this.captionNode}
-                className={`${isIntersecting ? "fadein" : ""}`}
             >
-                <CaptionItem ref={this.captionItems}>
+                <CaptionItem
+                    className={`${isIntersecting ? "fadeGroup" : ""}`}
+                    ref={this.captionItems}>
                     {children}
                 </CaptionItem>
             </CaptionContainer>
