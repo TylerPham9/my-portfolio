@@ -8,6 +8,6 @@ range: 'Jan 2020 - Present'
 url: 'https://www.rivaltech.com/'
 ---
 
-- Analyzed time series data from home energy monitoring sensor to determine optimal cost saving strategies
-- Built and deployed a testing infrastructure in Python to simulate the residential electricity usage of 200 houses over AWS and validated different strategies
-- Designed and deployed an AWS microservice to run daily to convert protobuf data stored on S3 of over 4000 devices to HDF5 which is more effectively used in the rest of the systems
+- Maintaining and improving a Cypress.io suite of smoke tests to check build stability
+- Communicating with the project management team and QA Lead to resolve defects
+- Improving the documentation of QA testing practices to enhance their repeatability, saving time and money and encouraging testing standardization and best practices
