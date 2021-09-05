@@ -28,12 +28,12 @@ module.exports = {
         },
         {
             name: 'LinkedIn',
-            url: 'https://www.linkedin.com/in/tyler-pham-46194393/',
+            url: 'https://www.linkedin.com/in/tylerpham9/',
             icon: 'fa fa-linkedin fa-lg'
         },
         {
             name: 'Instagram',
-            url: 'https://www.instagram.com/tyler.pee/',
+            url: 'https://www.instagram.com/hey.its.tylerp/',
             icon: 'fa fa-instagram fa-lg'
         }
     ]
