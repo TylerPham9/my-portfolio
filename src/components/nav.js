@@ -116,7 +116,7 @@ class Nav extends Component {
         console.log(this.state.menuOpen);
     }
 
-        
+
     render() {
         return (
             <NavContainer>
@@ -156,8 +156,8 @@ class Nav extends Component {
                             </NavListItem>
                         </NavList>
                     </NavLinks>
-                    <MobileMenu 
-                        menuOpen={this.state.menuOpen} 
+                    <MobileMenu
+                        menuOpen={this.state.menuOpen}
                         toggleMenu={this.toggleMenu} />
                 </Navbar>
             </NavContainer>

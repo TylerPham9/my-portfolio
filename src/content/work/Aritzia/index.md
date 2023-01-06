@@ -1,11 +1,11 @@
 ---
-date: "2020-01-06"
-title: "Jr. QA Engineer"
-company: "Rival Technologies"
-shortCompany: "Rival"
+date: "2022-02-14"
+title: "QA Automation Engineer"
+company: "Aritzia"
+shortCompany: "Aritzia"
 location: "Vancouver, BC"
-range: "Jan 2020 - Feb 2022"
-url: "https://www.rivaltech.com/"
+range: "Feb 2022 - Present"
+url: "https://www.aritzia.com/"
 ---
 
 - Developing and maintaining a Cypress.io suite of end to end tests that reduced manual testing from roughly 1 hour to an automated 10 minutes
